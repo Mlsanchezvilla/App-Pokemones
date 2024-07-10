@@ -1,10 +1,36 @@
 .App {
   text-align: center;
+  background-image: url(../public/pokemon-3.png);
+  min-height: 105vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 60px; 
+  padding: 40px; 
 }
+
+.my-button {
+  background-color: skyblue;
+  text-decoration-line:underline;
+  border: none;
+  text-shadow: 2px 2px 5px white;
+  color: black;
+  padding: 5px 20px;
+  padding-block: 10px;
+  text-align: center;
+  font-size: 25px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+  
+
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  
 }
 
 @media (prefers-reduced-motion: no-preference) {
