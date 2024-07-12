@@ -1,0 +1,58 @@
+
+.containerCard{
+    width: 200px; /* Ancho de la tarjeta */
+    height: 400px; /* Alto de la tarjeta */
+    flex-direction: column;
+    background-color:lightslategray;
+    border: 7px solid whitesmoke;
+    padding: 10px;
+    margin: 30px;
+    border-radius: 8px;
+    display: flex;
+
+
+}
+
+.containerFavorite {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.containerData {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    background-color: silver;
+    width: 40px;
+    height: 80%;
+    border-radius: 5px;
+    border: 3px solid whitesmoke;
+    cursor: pointer;
+    margin: 0px;
+    
+}
+
+.imageStyle{
+    height: 180px;
+    border-radius: 30%;
+    border: 5px solid whitesmoke;
+}
+
+.nameStyle{
+    font-size: 14px;
+    margin-top: 5px;
+    font-style: italic;
+    text-align: center;
+    color: black;
+}
+
