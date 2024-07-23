@@ -1,43 +1,14 @@
 .container {
     display:flex;
     justify-content: space-between;
-    background-color: midnightblue;
+    background-color: khaki;
     align-items: center;
     border-radius: 16px ;
-    border: 3px solid black;
-    width: 80%;
+    border: 3px solid firebrick;
+    width: 80vw;
     height: 50px;
     box-shadow: 0 0 10px darkgrey;
     margin: 0%;
     cursor:pointer;
     margin-bottom: 10px;
 }
-.containerLink {
-    width: 65%;
-    height: 100%;
-    display: flex;
-}
-
-.link {
-    color: black;
-    text-decoration:none;
-    font-weight: bold;
-    font-size: 18px;
-    margin-left: 25px;
-    margin-right: 25px;
-    font-size: medium;
-    margin-top: 10px;
-    padding: 0.3rem;
-    border-radius: 16px ;
-    border: 2px solid black;
-    height: 17px;
-    box-shadow: 1px 1px 10px darkgrey;
-    inline-size: 100px;
-    background-color:lightblue;
-    text-align: center;
-}
-
-
-
-
-

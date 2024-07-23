@@ -21,10 +21,14 @@ const postCreatePokemon = async (req, res) => {
             let TypesExistentes = await Types.findOne({where: { name: type_ }});
 
             if(!TypesExistentes) {
-                existente = await Types.create({name: type_});
+                TypesExistentes = await Types.create({name: type_});
             }
-
-            await newPokemon.addTypes(TypesExistentes);
+            
+            try {
+                await newPokemon.addTypes(TypesExistentes);
+            } catch (error) {
+                console.log(error);
+            }
 
         }
         res.status(201).json({ message: "El Pokemon se creo correctamente" });

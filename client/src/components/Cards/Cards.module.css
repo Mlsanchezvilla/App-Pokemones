@@ -4,5 +4,14 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px; /* Espacio entre las tarjetas */
-    width: 80%;
+}
+
+.containerPrincipal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-position: center;
+    background-size:auto;
+    background-image: url("https://wallpapercave.com/wp/wp1877538.jpg")
 }

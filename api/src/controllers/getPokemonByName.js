@@ -25,13 +25,16 @@ const getPokemonByName = async (req, res) => {
       pokemons.push({
         id: pokemons_api.id,
         name: pokemons_api.name,
+        image: pokemons_api.sprites.front_default,
         types: pokemons_api.types.map((type) => type.type.name),
       })
     } else {
       for (const pokemon of pokemons_db) {
+        console.log(pokemon)
         pokemons.push({
           id: pokemon.id,
           name: pokemon.name,
+          image: pokemon.image,
           types: pokemon.Types.map((type) => type.name),
         })
       }

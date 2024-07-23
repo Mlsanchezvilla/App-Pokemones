@@ -1,43 +1,65 @@
 .containerPrincipal {
-    width: 100%;
-    height: 100%;
+    
     display: flex;
-    padding: 100px;
+    height: 100vh;
     justify-content: center;
     align-items: center;
-    
+    background-position: center;
+    background-size:auto;
+    background-image: url("https://wallpapercave.com/wp/wp1877538.jpg");
 
 }
 
 
 .containerImage {
-    width: 50%;
+    width: 20%;
     display: flex;
+    flex-direction:row;
     justify-content: center;
     align-items: center;
+    margin: 10px;
+
+
 }
 
 .image {
-    border-radius: 50%;
-    border: 6px solid whitesmoke;
-    margin: 10px;
+    border-radius: 100px;
+    border: 7px solid wheat;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 35%;
+    right: 5%;
 
 }
 
 .containerInformation {
-    width: 50%;
-    height: 50%;
-    background-color: powderblue;
+
+    position: absolute;
+    top: 28%;
+    right: 24%;
+    width: 180px; /* Ajusta el tamaño según tus necesidades */
+    white-space: pre-wrap;
+    font-style:italic;
+    border: 7px solid wheat;
+    border-radius: 10px;
+    font-size:smaller;
+    color: firebrick; /* Ajusta el color del texto si es necesario */
     display: flex;
+    text-align:justify;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: black;
-    font-style: oblique;
-    font-size: 14px;
-    padding:2px;
-    border-radius: 200px;
-    border: 6px solid whitesmoke;
-    margin: 20px;
+
+}
+
+h2 {
+    margin: 2px;
+    padding: 2px;
+}
+
+h1 {
+    margin: 2px;
+    padding: 2px;
+    color: yellow;
+    font-size: 32px;
 
 }

@@ -3,11 +3,11 @@
     width: 200px; /* Ancho de la tarjeta */
     height: 400px; /* Alto de la tarjeta */
     flex-direction: column;
-    background-color:lightslategray;
-    border: 7px solid whitesmoke;
+    background-color: khaki;
+    border: 7px solid firebrick;
     padding: 10px;
-    margin: 30px;
-    border-radius: 8px;
+    margin: 10px;
+    border-radius: 12px;
     display: flex;
 
 
@@ -45,13 +45,14 @@
 .imageStyle{
     height: 180px;
     border-radius: 30%;
-    border: 5px solid whitesmoke;
+    border: 5px solid firebrick;
+
 }
 
 .nameStyle{
-    font-size: 14px;
-    margin-top: 5px;
-    font-style: italic;
+    font-size: 20px;
+    margin-top: 10px;
+    font-style:normal;
     text-align: center;
     color: black;
 }
