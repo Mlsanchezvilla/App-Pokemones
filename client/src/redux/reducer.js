@@ -35,7 +35,7 @@ import {
         return {
           ...state,
           myFavorites: state.allPokemons.filter(
-            (pokemon) => pokemon.gender.toUpperCase() === payload.toUpperCase()
+            (pokemon) => pokemon.type.toUpperCase() === payload.toUpperCase()
           ),
         };
   
