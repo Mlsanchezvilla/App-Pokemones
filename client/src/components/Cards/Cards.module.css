@@ -9,9 +9,55 @@
 .containerPrincipal{
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     justify-content: center;
     align-items: center;
     background-position: center;
     background-size:auto;
     background-image: url("https://wallpapercave.com/wp/wp1877538.jpg")
+}
+
+.tittle {
+    font-size: 30px;
+    font-weight:bolder;
+    margin-bottom: 5px; 
+    font-style: italic;   
+    color: white;
+}
+
+.button {
+    background-color: forestgreen;
+    border: none;
+    color:  khaki;
+    padding: 7px 15px;
+    font-size: 15px;
+    font-weight: bold;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 20px;
+    border-style:dashed;
+    
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+
+}
+.botoncito{
+    background-color: forestgreen;
+    border: none;
+    color:  khaki;
+    padding: 7px 15px;
+    font-size: 15px;
+    font-weight: bold;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 20px;
+    border-style:dashed;
+    margin: 20px;
+   
+    
 }

@@ -13,8 +13,10 @@ function App() {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/home"element={<Cards />}/>
+      <Route path="/create"element={<form/>}/>
       <Route path="/detail/:detailId" element={<Detail />} />
       <Route path="/form" element={<FormPage />} />
+      
 
 
     </Routes>

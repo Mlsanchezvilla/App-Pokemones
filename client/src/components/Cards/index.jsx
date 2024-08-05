@@ -1,28 +1,27 @@
 import Card from '../Card';
 import { useState, useEffect } from "react";
-import styles from './Cards.module.css'
+import styles from './Cards.module.css';
 import axios from "axios";
 import Nav from "../../components/Nav/nav.jsx";
-
+import { useNavigate } from 'react-router-dom';
 
 export default function Cards() {
    const [pokemons, setPokemons] = useState([]);
    const [pokemonsOriginals, setPokemonsOriginals] = useState([]);
+   const [currentPage, setCurrentPage] = useState(1); // Página actual
+   const [cardsPerPage] = useState(12); // Tarjetas por página
+   const navigate = useNavigate();
    
    useEffect(() => {
-      listPokemons()
+      listPokemons();
    }, []);
-
-   useEffect(() => {
-      console.log("entrerweeewe")
-   }, [pokemons]);
 
    async function onSearch(name) {
       try {
          const response = await axios(`http://localhost:3001/pokemons/names/search?name=${name}`);
          if (response.data.pokemons) {
             setPokemons(response.data.pokemons);
-            console.log(pokemons)
+            setPokemonsOriginals(response.data.pokemons);
          }
       } catch (error) {
          window.alert("Error al buscar el pokemon");
@@ -52,24 +51,45 @@ export default function Cards() {
       setPokemons(sortedPokemons);
    };
 
-
    const handleFilter = (e) => {
       const filterPokemons = [...pokemonsOriginals]
-         .filter((pokemon) => pokemon.types.includes(e.target.value))
+         .filter((pokemon) => pokemon.types.includes(e.target.value));
       setPokemons(filterPokemons);
    }
 
    const handleFilterSouce = (e) => {
       const filterPokemons = [...pokemonsOriginals]
-         .filter((pokemon) => pokemon.source === e.target.value)
+         .filter((pokemon) => pokemon.source === e.target.value);
       setPokemons(filterPokemons);
    }
 
+   const createForm = () => {
+      navigate('/form');
+   }
+
+   // Paginación
+   const indexOfLastCard = currentPage * cardsPerPage;
+   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+   const currentCards = pokemons.slice(indexOfFirstCard, indexOfLastCard);
+
+   // Cambiar de página
+   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+   // Número total de páginas
+   const pageNumbers = [];
+   for (let i = 1; i <= Math.ceil(pokemons.length / cardsPerPage); i++) {
+      pageNumbers.push(i);
+   }
+
+   
    return (
       <div className={styles.containerPrincipal}>
          <div>
             <Nav onSearch={onSearch} />
          </div>
+         
+         <h1 className={styles.tittle}>Filtros y Ordenamiento</h1>
+         
          <div>
             <select className="handleOrder" onChange={handleOrder}>
                <option value="a">Ascendente</option>
@@ -100,16 +120,26 @@ export default function Cards() {
             </select>
          </div>
          <div className={styles.container}>
-            {pokemons.map((pokemon) => (
+            {currentCards.map((pokemon) => (
                <Card
                   key={pokemon.id}
                   id={pokemon.id}
                   name={pokemon.name}
                   image={pokemon.image}
                   types={pokemon.types}
-               />
+                  />
             ))}
          </div>
+
+         {/* Controles de paginación */}
+         <div className={styles.pagination}>
+            <button  className={styles.button} onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>Anterior</button>
+            {pageNumbers.map(number => (
+               <button className={styles.button} key={number} onClick={() => paginate(number)}>{number}</button>
+            ))}
+            <button className={styles.button} onClick={() => paginate(currentPage + 1)} disabled={currentPage === pageNumbers.length}>Siguiente</button>
+            <div> <button className={styles.botoncito} onClick={createForm}>Ir a Crear Nuevo Pokémon</button> </div>
+         </div>
       </div>
-   )
+   );
 }

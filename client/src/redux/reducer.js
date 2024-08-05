@@ -1,76 +1,45 @@
-import {
-    ADD_FAVORITE,
-    FILTER_CARDS,
-    ORDER_CARDS,
-    REMOVE_FAVORITE,
-  } from "./actions";
-  
-  const initialState = {
-    myFavorites: [],
-    allPokemons: [],
-    pokemonsOrder: [],
-  };
-  
-  const reducer = (state = initialState, action) => {
-    const { type, payload } = action;
-    switch (type) {
-      case ADD_FAVORITE:
+import { FILTER_CARDS, ORDER_CARDS } from './actions';
+
+const initialState = {
+  allPokemons: [],
+  filteredPokemons: [],
+};
+
+const reducer = (state = initialState, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case FILTER_CARDS:
+      if (payload.toUpperCase() === 'ALL') {
         return {
           ...state,
-          allPokemons: payload,
-          myFavorites: payload,
+          filteredPokemons: state.allPokemons,
         };
-  
-      case REMOVE_FAVORITE:
-        console.log("nuevos favoritos", payload);
-        return { ...state, myFavorites: payload, allPokemons: payload };
-  
-      case FILTER_CARDS:
-        if (payload.toUpperCase() === "ALL") {
-          return {
-            ...state,
-            myFavorites: state.allPokemons
-          };
+      }
+      return {
+        ...state,
+        filteredPokemons: state.allPokemons.filter(
+          pokemon => pokemon.type.toUpperCase() === payload.toUpperCase()
+        ),
+      };
+
+    case ORDER_CARDS:
+      const sortedPokemons = [...state.filteredPokemons].sort((a, b) => {
+        if (payload === 'asc') {
+          return a.name.localeCompare(b.name);
+        } else if (payload === 'desc') {
+          return b.name.localeCompare(a.name);
         }
-        return {
-          ...state,
-          myFavorites: state.allPokemons.filter(
-            (pokemon) => pokemon.type.toUpperCase() === payload.toUpperCase()
-          ),
-        };
-  
-      case ORDER_CARDS:
-        if (payload.toUpperCase() === "A") {
-          return {
-            ...state,
-            myFavorites: state.allPokemons.sort((a, b) =>
-              a.name > b.name ? 1 : -1
-            ),
-          };
-        } else {
-          return {
-            ...state,
-            myFavorites: state.allPokemons.sort((a, b) =>
-              a.name < b.name ? 1 : -1
-            ),
-          };
-        }
-  
-      default:
-        return state;
-    }
-  };
-  
-  let a = [
-    {
-      saludo: "andres",
-    },
-    {
-      saludo: "andrez",
-    },
-  ];
-  
-  a.sort((a, b) => a.saludo - b.saludo);
-  
-  export default reducer;
-  
+        return 0;
+      });
+      return {
+        ...state,
+        filteredPokemons: sortedPokemons,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export default reducer;
