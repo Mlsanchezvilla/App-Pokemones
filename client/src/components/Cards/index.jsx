@@ -2,26 +2,29 @@ import Card from '../Card';
 import { useState, useEffect } from "react";
 import styles from './Cards.module.css';
 import axios from "axios";
+import { useSelector, connect, useDispatch } from "react-redux";
 import Nav from "../../components/Nav/nav.jsx";
 import { useNavigate } from 'react-router-dom';
+import { filterCards, orderCards, fillPokemons, fillOriginalPokemos, filterBySource } from "../../redux/actions";
 
-export default function Cards() {
-   const [pokemons, setPokemons] = useState([]);
-   const [pokemonsOriginals, setPokemonsOriginals] = useState([]);
+const Cards = (props) => {
    const [currentPage, setCurrentPage] = useState(1); // Página actual
    const [cardsPerPage] = useState(12); // Tarjetas por página
    const navigate = useNavigate();
+   const pokemons = useSelector(state => state.allPokemons);
+
+   const dispatch = useDispatch();
    
    useEffect(() => {
       listPokemons();
    }, []);
 
+
    async function onSearch(name) {
       try {
          const response = await axios(`http://localhost:3001/pokemons/names/search?name=${name}`);
          if (response.data.pokemons) {
-            setPokemons(response.data.pokemons);
-            setPokemonsOriginals(response.data.pokemons);
+            dispatch(fillPokemons(response.data.pokemons));
          }
       } catch (error) {
          window.alert("Error al buscar el pokemon");
@@ -32,8 +35,8 @@ export default function Cards() {
       try {
          const response = await axios(`http://localhost:3001/pokemons/`);
          if (response.data.pokemons) {
-            setPokemons(response.data.pokemons);
-            setPokemonsOriginals(response.data.pokemons);
+            dispatch(fillPokemons(response.data.pokemons));
+            dispatch(fillOriginalPokemos(response.data.pokemons));
          }
       } catch (error) {
          window.alert("Error al listar los pokemons");
@@ -41,26 +44,16 @@ export default function Cards() {
    }
 
    const handleOrder = (e) => {
-      const sortedPokemons = [...pokemonsOriginals].sort((a, b) => {
-         if (e.target.value.toUpperCase() === "A") {
-            return a.name > b.name ? 1 : -1;
-         } else {
-            return a.name < b.name ? 1 : -1;
-         }
-      });
-      setPokemons(sortedPokemons);
-   };
+      dispatch(orderCards(e.target.value));
+  }
 
-   const handleFilter = (e) => {
-      const filterPokemons = [...pokemonsOriginals]
-         .filter((pokemon) => pokemon.types.includes(e.target.value));
-      setPokemons(filterPokemons);
-   }
+
+  const handleFilter = (e) => {
+      dispatch(filterCards(e.target.value));
+  }
 
    const handleFilterSouce = (e) => {
-      const filterPokemons = [...pokemonsOriginals]
-         .filter((pokemon) => pokemon.source === e.target.value);
-      setPokemons(filterPokemons);
+      dispatch(filterBySource(e.target.value));
    }
 
    const createForm = () => {
@@ -96,6 +89,7 @@ export default function Cards() {
                <option value="d">Descendente</option>
             </select>
             <select className="handleFilter" onChange={handleFilter}>
+               <option value="all">Todos</option>
                <option value="fire">Fuego</option>
                <option value="water">Agua</option>
                <option value="grass">Planta</option>
@@ -143,3 +137,11 @@ export default function Cards() {
       </div>
    );
 }
+
+const mapStateToProps = (state) => {
+   return {
+      allPokemons: state.allPokemons,
+   };
+};
+
+export default connect(mapStateToProps, { filterCards, orderCards, fillPokemons, fillOriginalPokemos, filterBySource })(Cards);
